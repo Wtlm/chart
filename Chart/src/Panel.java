@@ -1,9 +1,5 @@
 import java.awt.*;
 import javax.swing.*;
-import javax.imageio.*;
-import java.lang.*;
-import java.util.*;
-import java.io.*;
 
 
 public class Panel extends JPanel{

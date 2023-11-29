@@ -2,8 +2,6 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import java.lang.*;
-
 public class Project extends JFrame{
 
     Panel Panel;

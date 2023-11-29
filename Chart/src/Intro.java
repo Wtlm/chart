@@ -1,11 +1,7 @@
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.*;
 import javax.imageio.*;
-import java.lang.*;
-import java.util.*;
 import java.io.*;
 
 public class Intro {
