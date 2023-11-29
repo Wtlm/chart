@@ -17,6 +17,7 @@ public class Intro {
         this.panel = panel;
         try {
             bgr = ImageIO.read(new File("D:/DSA/Project/lib/Cover.png"));
+            bgr = bgr.getScaledInstance(1000, 500, 2/3);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
