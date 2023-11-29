@@ -11,6 +11,7 @@ public class Project extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("INTERACTIVE CHART");
         setPreferredSize(new Dimension(1500, 750));
+        setBackground(Color.decode("#f0f4f0"));
         setResizable(false);
         this.pack();
 
