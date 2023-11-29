@@ -1,6 +1,11 @@
+package Stages;
 import java.awt.*;
 
 import javax.swing.*;
+
+import Action.MouseHandler;
+import Interface.Panel;
+
 import javax.imageio.*;
 import java.io.*;
 

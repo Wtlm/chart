@@ -1,5 +1,8 @@
+package Action;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import Interface.Panel;
 
 public class MouseHandler implements MouseListener{
     Panel panel;

@@ -1,5 +1,8 @@
+package Interface;
 import java.awt.*;
 import javax.swing.*;
+
+import Stages.Intro;
 
 
 public class Panel extends JPanel{
