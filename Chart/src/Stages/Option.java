@@ -20,7 +20,7 @@ public class Option {
         ImageIcon bar = new ImageIcon("D:/DSA/chart/Chart/Data/Bar.png");
         JButton piebutton = new JButton(pie);
         JButton barbutton = new JButton(bar);
-        piebutton.setBounds(0,100,100,100);
+        piebutton.setBounds(400,100,100,100);
         barbutton.setBounds(200,200,100,100);
 
         panel.add(label);
