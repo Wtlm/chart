@@ -1,16 +1,17 @@
 package Interface;
+
 import java.awt.*;
 
 import javax.swing.*;
 
-public class Project extends JFrame{
+public class Project extends JFrame {
 
     Panel Panel;
 
-    public Project(){
+    public Project() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("INTERACTIVE CHART");
-        setPreferredSize(new Dimension(1500, 750));
+        setPreferredSize(new Dimension(1200, 600));
         setBackground(Color.decode("#f0f4f0"));
         setResizable(false);
         this.pack();
@@ -22,6 +23,5 @@ public class Project extends JFrame{
         setVisible(true);
 
     }
-
 
 }
