@@ -14,9 +14,13 @@ public class Intro {
     public Image bgr;
     MouseHandler mouseHandler;
     Panel panel;
+    JButton startButton;
+    private boolean start;
 
     public Intro(Panel panel) {
         this.panel = panel;
+        startButton.addMouseListener(mouseHandler);
+        start = false;
         try {
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/Cover.png"));
         } catch (IOException e) {
@@ -32,15 +36,16 @@ public class Intro {
 
     public void DisplayIntro(Panel panel) {
         ImageIcon icon = new ImageIcon("D:/DSA/chart/Data/Cover.gif");
-        JButton button = new JButton("Let Start!");
-        button.setFont(new Font("Quicksand", Font.PLAIN, 16));
-        button.setForeground(Color.white);
-        button.setBounds(280, 350, 100, 40);
-        button.setBackground(Color.decode("#7806A6"));
-        button.addMouseListener(mouseHandler);
-        panel.add(button);
+        JButton startButton = new JButton("Let Start!");
+        startButton.setFont(new Font("Quicksand", Font.PLAIN, 16));
+        startButton.setForeground(Color.white);
+        startButton.setBounds(280, 350, 100, 40);
+        startButton.setBackground(Color.decode("#7806A6"));
+        panel.add(startButton);
+
         JButton button1 = new JButton(icon);
         button1.setBounds(650, 50, 490, 490);
         panel.add(button1);
     }
+
 }
