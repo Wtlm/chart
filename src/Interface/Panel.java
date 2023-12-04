@@ -7,19 +7,22 @@ import Stages.Intro;
 import Stages.Option;
 
 public class Panel extends JPanel {
-
     public Intro intro;
     public Option option;
 
     public Panel() {
         this.setFocusable(true);
         intro = new Intro(this);
-        // option = new Option(this);
+        option = new Option(this);
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        intro.draw(g);
+        if (intro.getStart() == false)
+            intro.draw(g);
+        else if (intro.getStart() == true)
+            option.draw(g);
+
     }
 
 }
