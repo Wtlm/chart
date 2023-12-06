@@ -23,6 +23,6 @@ public class Panel extends JPanel {
         else if (intro.getStart() == true)
             option.draw(g);
 
-    }
+    }hggfhgfghf
 
 }
