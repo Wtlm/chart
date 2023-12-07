@@ -18,30 +18,21 @@ public class Intro {
 
     public Image cover;
     public JButton startButton;
-    private boolean start = false;
 
     public Intro(Panel panel) {
         this.panel = panel;
         startButton = new JButton();
         try {
             cover = ImageIO.read(new File("D:/DSA/chart/Data/Cover.png"));
-            start();
+            start(panel);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    public boolean getStart() {
-        return start;
-    }
-
-    public void setStart(boolean start) {
-        this.start = start;
-    }
-
-    public void draw(Graphics g) {
-        g.drawImage(cover, 0, 0, 1200, 600, null);
+    public void draw(Graphics2D g2) {
+        g2.drawImage(cover, 0, 0, 1200, 600, null);
         DisplayIntro(panel);
     }
 
@@ -59,12 +50,12 @@ public class Intro {
         panel.add(button1);
     }
 
-    public void start() {
+    public void start(Panel panel) {
         ActionListener startListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Start");
-                setStart(true);
+                panel.stage = panel.optionStage;
             }
         };
         startButton.addActionListener(startListener);
