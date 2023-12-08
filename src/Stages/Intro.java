@@ -18,12 +18,13 @@ public class Intro {
 
     public Image cover;
     public ImageIcon icon;
-    public JButton startButton, button1;
+    public JButton startButton;
     JLabel gif;
 
     public Intro(Panel panel) {
         this.panel = panel;
         startButton = new JButton();
+        gif = new JLabel();
         try {
             cover = ImageIO.read(new File("D:/DSA/chart/Data/Cover.png"));
             icon = new ImageIcon("D:/DSA/chart/Data/Cover.gif");
@@ -32,7 +33,6 @@ public class Intro {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        gif = new JLabel(icon);
         // button1 = new JButton(icon);
     }
 
@@ -49,6 +49,7 @@ public class Intro {
         startButton.setBackground(Color.decode("#7806A6"));
         panel.add(startButton);
 
+        gif.setIcon(icon);
         gif.setBounds(650, 50, 490, 490);
         panel.add(gif);
     }
@@ -59,6 +60,8 @@ public class Intro {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Start");
                 panel.stage = panel.optionStage;
+                panel.remove(startButton);
+                panel.remove(gif);
             }
         };
         startButton.addActionListener(startListener);

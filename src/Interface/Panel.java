@@ -15,8 +15,13 @@ public class Panel extends JPanel {
 
     public Panel() {
         this.setFocusable(true);
+        try {
         intro = new Intro(this);
-        option = new Option(this);
+        option = new Option(this); 
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
     }
 
     @Override
@@ -25,9 +30,9 @@ public class Panel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         if (stage == introStage)
             intro.draw(g2);
-        else if (stage != introStage)
-            System.out.println(stage);
-        // option.draw(g2);
+        else if (stage == optionStage)
+            option.draw(g2);
+            repaint();
 
     }
 

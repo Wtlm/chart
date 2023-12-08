@@ -21,6 +21,8 @@ public class Option {
     public Option(Panel panel) {
         this.panel = panel;
         label = new JLabel();
+        pieButton = new JButton();
+        barButton = new JButton();
         try {
 
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
@@ -31,25 +33,27 @@ public class Option {
             e.printStackTrace();
         }
 
-        pieButton = new JButton(pie);
-        barButton = new JButton(bar);
+
     }
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(bgr, 0, 0, null);
+        g2.drawImage(bgr, 0, 0,1200, 600, null);
         addButton(panel);
     }
 
     public void addButton(Panel panel) {
         label.setText("Choose a chart");
+        label.setBounds(0, 0, panel.getWidth(),100);
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 30));
         panel.add(label);
 
-        pieButton.setBounds(400, 100, 100, 100);
+        pieButton.setIcon(pie);
+        pieButton.setBounds(100, 100, 400,400 );
         panel.add(pieButton);
 
-        barButton.setBounds(200, 200, 100, 100);
+        barButton.setIcon(bar);
+        barButton.setBounds(700, 100, 400, 400);
         panel.add(barButton);
     }
 
