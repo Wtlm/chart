@@ -1,5 +1,6 @@
 package Stages;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -8,6 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.*;
 
 import Interface.Panel;
 
@@ -33,23 +35,23 @@ public class Option {
             e.printStackTrace();
         }
 
-
     }
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(bgr, 0, 0,1200, 600, null);
+        g2.drawImage(bgr, 0, 0, 1200, 600, null);
         addButton(panel);
     }
 
     public void addButton(Panel panel) {
         label.setText("Choose a chart");
-        label.setBounds(0, 0, panel.getWidth(),100);
+        label.setBounds(0, 0, panel.getWidth(), 100);
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 30));
+        label.setForeground(Color.white);
         panel.add(label);
 
         pieButton.setIcon(pie);
-        pieButton.setBounds(100, 100, 400,400 );
+        pieButton.setBounds(100, 100, 400, 400);
         panel.add(pieButton);
 
         barButton.setIcon(bar);
