@@ -19,13 +19,15 @@ public class Panel extends JPanel {
         option = new Option(this);
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         if (stage == introStage)
             intro.draw(g2);
-        else if (stage == optionStage)
-            option.draw(g2);
+        else if (stage != introStage)
+            System.out.println(stage);
+        // option.draw(g2);
 
     }
 

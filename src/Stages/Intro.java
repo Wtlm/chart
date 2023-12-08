@@ -17,18 +17,23 @@ public class Intro {
     Panel panel;
 
     public Image cover;
-    public JButton startButton;
+    public ImageIcon icon;
+    public JButton startButton, button1;
+    JLabel gif;
 
     public Intro(Panel panel) {
         this.panel = panel;
         startButton = new JButton();
         try {
             cover = ImageIO.read(new File("D:/DSA/chart/Data/Cover.png"));
+            icon = new ImageIcon("D:/DSA/chart/Data/Cover.gif");
             start(panel);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        gif = new JLabel(icon);
+        // button1 = new JButton(icon);
     }
 
     public void draw(Graphics2D g2) {
@@ -37,7 +42,6 @@ public class Intro {
     }
 
     public void DisplayIntro(Panel panel) {
-        ImageIcon icon = new ImageIcon("D:/DSA/chart/Data/Cover.gif");
         startButton.setText("Let Start!");
         startButton.setFont(new Font("Quicksand", Font.PLAIN, 16));
         startButton.setForeground(Color.white);
@@ -45,9 +49,8 @@ public class Intro {
         startButton.setBackground(Color.decode("#7806A6"));
         panel.add(startButton);
 
-        JButton button1 = new JButton(icon);
-        button1.setBounds(650, 50, 490, 490);
-        panel.add(button1);
+        gif.setBounds(650, 50, 490, 490);
+        panel.add(gif);
     }
 
     public void start(Panel panel) {

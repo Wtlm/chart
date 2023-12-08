@@ -20,16 +20,17 @@ public class Option {
 
     public Option(Panel panel) {
         this.panel = panel;
+        label = new JLabel();
         try {
 
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
-            pie = new ImageIcon("D:/DSA/chart/Chart/Data/Pie.png");
-            bar = new ImageIcon("D:/DSA/chart/Chart/Data/Bar.png");
+            pie = new ImageIcon("D:/DSA/chart/Data/Pie.png");
+            bar = new ImageIcon("D:/DSA/chart/Data/Bar.png");
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        label = new JLabel();
+
         pieButton = new JButton(pie);
         barButton = new JButton(bar);
     }
