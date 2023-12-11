@@ -19,17 +19,20 @@ public class Option {
     JLabel label;
     ImageIcon pie, bar;
     JButton pieButton, barButton;
+    private int height;
 
     public Option(Panel panel) {
         this.panel = panel;
         label = new JLabel();
         pieButton = new JButton();
         barButton = new JButton();
+        height = 600;
         try {
 
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
             pie = new ImageIcon("D:/DSA/chart/Data/Pie.png");
             bar = new ImageIcon("D:/DSA/chart/Data/Bar.png");
+
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -38,25 +41,43 @@ public class Option {
     }
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(bgr, 0, 0, 1200, 600, null);
+        // long a = System.currentTimeMillis();
+        // int b = 600;
+        // while (b >= 0) {
+        g2.drawImage(bgr, 0, getHeight(), 1200, 600, null);
+        // panel.repaint();
+        // }
         addButton(panel);
+    }
+
+    public int updateBgr() {
+        return height -= 1;
+
     }
 
     public void addButton(Panel panel) {
         label.setText("Choose a chart");
-        label.setBounds(0, 0, panel.getWidth(), 100);
+        label.setBounds(0, getHeight(), panel.getWidth(), 100);
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 30));
         label.setForeground(Color.white);
         panel.add(label);
 
         pieButton.setIcon(pie);
-        pieButton.setBounds(100, 100, 400, 400);
+        pieButton.setBounds(100, getHeight() + 100, 400, 400);
         panel.add(pieButton);
 
         barButton.setIcon(bar);
-        barButton.setBounds(700, 100, 400, 400);
+        barButton.setBounds(700, getHeight() + 100, 400, 400);
         panel.add(barButton);
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
 }
