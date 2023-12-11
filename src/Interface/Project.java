@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class Project extends JFrame {
 
-    Panel Panel;
+    Panel panel;
 
     public Project() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -16,12 +16,16 @@ public class Project extends JFrame {
         setResizable(false);
         this.pack();
 
-        Panel = new Panel();
-        add(Panel);
+        panel = new Panel();
+        add(panel);
 
         setLocationRelativeTo(null);
         setVisible(true);
 
+    }
+
+    public void startThread() {
+        panel.startThread();
     }
 
 }
