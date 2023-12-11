@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import Interface.Panel;
-import Stages.Intro;
 
 public class MouseHandler implements MouseListener {
     Panel panel;
