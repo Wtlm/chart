@@ -9,10 +9,12 @@ import javax.swing.*;
 
 import Stages.Intro;
 import Stages.Option;
+import Support.*;
 
 public class Panel extends JPanel implements Runnable {
     public Intro intro;
     public Option option;
+    public Table table;
     public int stage;
     public int introStage = 0;
     public int optionStage = 1;
@@ -26,6 +28,8 @@ public class Panel extends JPanel implements Runnable {
             intro = new Intro(this);
             option = new Option(this);
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
+            table = new Table(this);
+
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -83,12 +87,12 @@ public class Panel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(bgr, 0, 0, 1200, 600, null);
-        if (stage == introStage)
-            intro.draw(g2);
-        else if (stage == optionStage)
+        if (stage == introStage) {
+            // intro.draw(g2);
+            table.draw(g2);
+        } else if (stage == optionStage)
             option.draw(g2);
-        // repaint();
-
+        repaint();
     }
 
 }
