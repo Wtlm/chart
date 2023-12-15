@@ -1,6 +1,10 @@
 package Interface;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import Stages.Intro;
@@ -14,12 +18,14 @@ public class Panel extends JPanel implements Runnable {
     public int optionStage = 1;
     public boolean run = true;
     public Thread thread;
+    BufferedImage bgr;
 
     public Panel() {
         this.setFocusable(true);
         try {
             intro = new Intro(this);
             option = new Option(this);
+            bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -76,6 +82,7 @@ public class Panel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        g2.drawImage(bgr, 0, 0, 1200, 600, null);
         if (stage == introStage)
             intro.draw(g2);
         else if (stage == optionStage)
