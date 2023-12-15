@@ -3,6 +3,7 @@ package Interface;
 import java.awt.*;
 import javax.swing.*;
 
+import Action.MouseHandler;
 import Stages.Intro;
 import Stages.Option;
 import Support.*;
@@ -16,13 +17,16 @@ public class Panel extends JPanel implements Runnable {
     public int optionStage = 1;
     public boolean run = true;
     public Thread thread;
+    public MouseHandler mouseHandler;
 
     public Panel() {
+        mouseHandler = new MouseHandler(this);
         this.setFocusable(true);
+        addMouseListener(mouseHandler);
         try {
-        // intro = new Intro(this);
-        // option = new Option(this); 
-        table = new Table(this);
+        intro = new Intro(this);
+        option = new Option(this); 
+        // table = new Table(this);
         
         } catch (Exception e) {
             // TODO: handle exception
@@ -81,12 +85,13 @@ public class Panel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         if (stage == introStage){
-            // intro.draw(g2);
-            table.draw(g2);
+            intro.draw(g2);
+            
         }
         else if (stage == optionStage)
             option.draw(g2);
-            repaint();
+            // table.draw(g2);
+            // repaint();
     }
 
 }
