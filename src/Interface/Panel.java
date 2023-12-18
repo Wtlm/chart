@@ -9,7 +9,7 @@ import javax.swing.*;
 
 import Stages.Intro;
 import Stages.Option;
-import Support.*;
+import Support.Table;
 
 public class Panel extends JPanel implements Runnable {
     public Intro intro;
@@ -27,12 +27,18 @@ public class Panel extends JPanel implements Runnable {
         try {
             intro = new Intro(this);
             option = new Option(this);
+            // table = new Table(this);
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
-            table = new Table(this);
 
         } catch (Exception e) {
             // TODO: handle exception
         }
+    }
+
+    public Panel(Table table) {
+        table = new Table(this);
+        this.table = table;
+
     }
 
     public void startThread() {
@@ -89,7 +95,8 @@ public class Panel extends JPanel implements Runnable {
         g2.drawImage(bgr, 0, 0, 1200, 600, null);
         if (stage == introStage) {
             // intro.draw(g2);
-            table.draw(g2);
+            // table.draw(g2);
+
         } else if (stage == optionStage)
             option.draw(g2);
         repaint();
