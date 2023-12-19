@@ -27,7 +27,7 @@ public class Panel extends JPanel implements Runnable {
         try {
             intro = new Intro(this);
             option = new Option(this);
-            // table = new Table(this);
+            table = new Table(this);
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
 
         } catch (Exception e) {
@@ -35,11 +35,11 @@ public class Panel extends JPanel implements Runnable {
         }
     }
 
-    public Panel(Table table) {
-        table = new Table(this);
-        this.table = table;
+    // public Panel(Table table) {
+    // table = new Table(this);
+    // this.table = table;
 
-    }
+    // }
 
     public void startThread() {
         if (thread == null) {
@@ -95,7 +95,7 @@ public class Panel extends JPanel implements Runnable {
         g2.drawImage(bgr, 0, 0, 1200, 600, null);
         if (stage == introStage) {
             // intro.draw(g2);
-            // table.draw(g2);
+            table.draw(g2);
 
         } else if (stage == optionStage)
             option.draw(g2);

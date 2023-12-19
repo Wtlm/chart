@@ -22,9 +22,9 @@ public class Project extends JFrame {
         panel = new Panel();
         add(panel);
 
-        tablePanel = new Panel(table);
+        // tablePanel = new Panel(table);
 
-        panel.add(tablePanel, BorderLayout.EAST);
+        // panel.add(tablePanel, BorderLayout.WEST);
 
         setLocationRelativeTo(null);
         setVisible(true);

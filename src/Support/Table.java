@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JScrollPane;
@@ -24,7 +25,7 @@ public class Table implements TableModelListener {
     public static JTable table;
     public JScrollPane spTable;
     public BufferedImage bgr;
-    public static int nColumn = 5, nRow = 5;
+    public static int nColumn = 100, nRow = 5;
     public static Object[][] data;
     public static String[] item;
     // int[][] a;
@@ -38,6 +39,7 @@ public class Table implements TableModelListener {
 
         // tableModel = new DefaultTableModel(data, item);
         table = new JTable();
+        spTable = new JScrollPane(table);
         values = new ArrayList<String>();
         try {
 
@@ -54,24 +56,24 @@ public class Table implements TableModelListener {
 
     public void draw(Graphics2D g2) {
         g2.drawImage(bgr, 0, 0, null);
+        // table.setBounds(0, 0, 500, 200);
+        spTable.setLocation(0, 0);
+
         // setTable(panel);
         // getValue();
     }
 
     public void setTable(Panel panel) {
-        table.setBounds(0, 0, 500, 200);
 
         table.setShowGrid(true);
         table.setModel(new DefaultTableModel(data, item));
         table.getModel().addTableModelListener(this);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        spTable = new JScrollPane(table);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setAutoscrolls(true);
         table.setFillsViewportHeight(true);
-
         // panel.add(table);
-
+        spTable.setSize(panel.getWidth() / 3, panel.getHeight());
         panel.add(spTable);
-
     }
 
     // public void updateTable(TableModelEvent e) {
