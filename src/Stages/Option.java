@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
@@ -18,13 +19,15 @@ import Interface.Panel;
 public class Option {
     Panel panel;
     public BufferedImage bgr, pie1, pie2, bar1, bar2;
-    JLabel label;
+    JLabel label, pie, bar;
     private int height;
     public int chooseBar, choosePie;
 
     public Option(Panel panel) {
         this.panel = panel;
         label = new JLabel();
+        pie = new JLabel();
+        bar = new JLabel();
         chooseBar = 0;
         choosePie = 0;
         height = 600;
@@ -71,15 +74,72 @@ public class Option {
         label.setForeground(Color.WHITE);
         panel.add(label);
 
-        // pieButton.setBounds(100, getHeight() + 100, 400, 400);
-        // pieButton.setIcon(pie);
-        // pieButton.setBorder(new RoundedBorder(200));
-        // pieButton.setBackground(Color.WHITE);
-        // panel.add(pieButton);
+        pie.setBounds(100, getHeight() + 100, 400, 400);
+        pie.addMouseListener(new MouseListener() {
 
-        // barButton.setIcon(bar);
-        // barButton.setBounds(700, getHeight() + 100, 400, 400);
-        // panel.add(barButton);
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                panel.stage = 2;
+                panel.remove(label);
+                panel.remove(pie);
+                panel.remove(bar);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                choosePie = 1;
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                choosePie = 0;
+            }
+            
+        });
+        panel.add(pie);
+        bar.setBounds(700, getHeight() + 100, 400, 400);
+        bar.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                panel.stage = 3;
+                panel.remove(label);
+                panel.remove(pie);
+                panel.remove(bar);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                chooseBar = 1;
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                chooseBar = 0;
+            }
+            
+        });
+        panel.add(bar);
     }
 
     public int getHeight() {
@@ -90,12 +150,5 @@ public class Option {
         this.height = height;
     }
 
-    public boolean isIn(MouseEvent e, BufferedImage image) {
-        if (e.getX() >= image.getMinX() && e.getX() <= (image.getMinX()+ image.getWidth()) 
-            && e.getY() >= image.getMinY() && e.getY() <= (image.getMinY()+ image.getHeight())){
-            return true;
-        } 
-        else return false;
-    }
 }
 

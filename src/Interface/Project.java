@@ -4,9 +4,12 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import Support.Table;
+
 public class Project extends JFrame {
 
-    Panel panel;
+    Panel panel, tablePanel;
+    Table table;
 
     public Project() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,6 +21,10 @@ public class Project extends JFrame {
 
         panel = new Panel();
         add(panel);
+
+        // tablePanel = new Panel(table);
+
+        // panel.add(tablePanel, BorderLayout.WEST);
 
         setLocationRelativeTo(null);
         setVisible(true);

@@ -1,77 +1,87 @@
 package Support;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import java.awt.Graphics;
-import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import Interface.Panel;
 
-public class Table {
+public class Table implements TableModelListener {
     public Panel panel;
+    DefaultTableModel tableModel;
+    public static JTable table;
     public JScrollPane spTable;
     public BufferedImage bgr;
     public static int nColumn = 5, nRow = 5;
     public static Object[][] data;
     public static String[] item;
-    int[][] a;
+    ArrayList<String> values;
 
-    public static JTable table;
-
-    public Table(Panel panel){
+    public Table(Panel panel) {
         this.panel = panel;
+
         data = new Object[nRow][nColumn];
-        table = new JTable(nRow + 1, nColumn);
         item = new String[nColumn];
+
+        table = new JTable();
+        spTable = new JScrollPane(table);
+        values = new ArrayList<String>();
         try {
+
+            table.setCellSelectionEnabled(true);
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
         } catch (Exception e) {
             // TODO: handle exception
         }
         setTable(panel);
-        System.out.println(table.getColumnCount());
-        System.out.println(table.getRowCount());
-        
 
     }
 
-    public void draw(Graphics g){
-        g.drawImage(bgr, 0, 0, null);
-        // setTable(panel);
-    }
-
-    public void setTable(Panel panel){
-        table.setBounds(0, 0, 200, 200);
-        table.setShowGrid(true);
-        table.setModel(new DefaultTableModel(data, item));
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        spTable = new JScrollPane(table);
+    public void draw(Graphics2D g2) {
+        g2.drawImage(bgr, 0, 0, null);
+        table.setBounds(0, 0, 500, 200);
+        spTable.setLocation(0, 0);
         panel.add(spTable);
     }
 
-    public Object[][] getData(){
-        return data;
+    public void setTable(Panel panel) {
+
+        table.setShowGrid(true);
+        table.setModel(new DefaultTableModel(data, item));
+        table.getModel().addTableModelListener(this);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setAutoscrolls(true);
+        table.setFillsViewportHeight(true);
+        spTable.setSize(panel.getWidth() / 3, panel.getHeight());
     }
 
-    public String[] getItem(){
-        return item;
+
+    public void getValue() {
+
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                System.out.println(table.getValueAt(i, j));
+            }
+        }
+        System.out.println();
     }
 
-    public void display(JTable table){
-        for(int i = 0; i < nRow; i++)
-            for (int j = 0; j < nColumn; j++)
-                a[i][j] = (int) table.getValueAt(i, j);
+    @Override
+    public void tableChanged(TableModelEvent e) {
+        getValue();
     }
 
-    public void setValueAt(Object value, int row, int col) {
-        data[row][col] = value;
-        // fireTableCellUpdated(row, col);
-    }
 }

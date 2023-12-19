@@ -1,12 +1,16 @@
 package Interface;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import Action.MouseHandler;
 import Stages.Intro;
 import Stages.Option;
-import Support.*;
+import Support.Table;
 
 public class Panel extends JPanel implements Runnable {
     public Intro intro;
@@ -15,19 +19,20 @@ public class Panel extends JPanel implements Runnable {
     public int stage;
     public int introStage = 0;
     public int optionStage = 1;
+    public int pieStage = 2;
+    public int barStage = 3;
     public boolean run = true;
     public Thread thread;
-    public MouseHandler mouseHandler;
+    BufferedImage bgr;
 
     public Panel() {
-        mouseHandler = new MouseHandler(this);
         this.setFocusable(true);
-        addMouseListener(mouseHandler);
         try {
-        intro = new Intro(this);
-        option = new Option(this); 
-        // table = new Table(this);
-        
+            intro = new Intro(this);
+            option = new Option(this);
+            table = new Table(this);
+            bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
+
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -58,14 +63,8 @@ public class Panel extends JPanel implements Runnable {
         beginTime = System.nanoTime();
 
         while (run) {
-
-            // if (System.nanoTime() - beginTime >= 100) {
             update();
-            // beginTime = System.nanoTime();
-            // }
-
             repaint();
-            // System.out.println(option.getHeight());
             long deltaTime = System.nanoTime() - beginTime;
             sleepTime = period - deltaTime;
             try {
@@ -90,8 +89,9 @@ public class Panel extends JPanel implements Runnable {
         }
         else if (stage == optionStage)
             option.draw(g2);
-            // table.draw(g2);
-            // repaint();
+        else table.draw(g2);
+
+        repaint();
     }
 
 }
