@@ -5,22 +5,21 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
+
 import java.awt.image.BufferedImage;
 
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
+
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-import Interface.Panel;
-
-public class Table implements TableModelListener {
-    public Panel panel;
+public class Table extends Component implements TableModelListener {
+    public JPanel panel;
     DefaultTableModel tableModel;
     public static JTable table;
     public JScrollPane spTable;
@@ -30,8 +29,8 @@ public class Table implements TableModelListener {
     public static String[] item;
     ArrayList<String> values;
 
-    public Table(Panel panel) {
-        this.panel = panel;
+    public Table(JPanel tablePanel) {
+        this.panel = tablePanel;
 
         data = new Object[nRow][nColumn];
         item = new String[nColumn];
@@ -40,7 +39,7 @@ public class Table implements TableModelListener {
         spTable = new JScrollPane(table);
         values = new ArrayList<String>();
         try {
-
+            table.setIgnoreRepaint(true);
             table.setCellSelectionEnabled(true);
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
         } catch (Exception e) {
@@ -51,13 +50,15 @@ public class Table implements TableModelListener {
     }
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(bgr, 0, 0, null);
-        table.setBounds(0, 0, 500, 200);
+        // g2.drawImage(bgr, 0, 0, null);
+        // table.setBounds(0, 0, 500, 200);
         spTable.setLocation(0, 0);
-        panel.add(spTable);
+        // spTable.getIgnoreRepaint();
+        // setTable(panel);
+        // getValue();
     }
 
-    public void setTable(Panel panel) {
+    public void setTable(JPanel tablePanel) {
 
         table.setShowGrid(true);
         table.setModel(new DefaultTableModel(data, item));
@@ -65,18 +66,24 @@ public class Table implements TableModelListener {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setAutoscrolls(true);
         table.setFillsViewportHeight(true);
-        spTable.setSize(panel.getWidth() / 3, panel.getHeight());
-    }
+        // panel.add(table);
+        spTable.setSize(tablePanel.getWidth() / 3, tablePanel.getHeight());
+        tablePanel.add(spTable);
 
+    }
 
     public void getValue() {
 
         for (int i = 0; i < table.getRowCount(); i++) {
             for (int j = 0; j < table.getColumnCount(); j++) {
                 System.out.println(table.getValueAt(i, j));
+
             }
         }
         System.out.println();
+        // for (int j = 0; j < table.getColumnCount(); j++) {
+        // System.out.println(item[j]);
+        // }
     }
 
     @Override
