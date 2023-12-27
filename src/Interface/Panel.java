@@ -22,7 +22,6 @@ public class Panel extends JPanel implements Runnable {
     public int pieStage = 2;
     public int barStage = 3;
     public boolean run = true;
-
     public Thread thread;
     BufferedImage bgr;
 
@@ -31,7 +30,7 @@ public class Panel extends JPanel implements Runnable {
         try {
             intro = new Intro(this);
             option = new Option(this);
-            // table = new Table(this);
+            table = new Table(this);
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
 
         } catch (Exception e) {
@@ -84,24 +83,15 @@ public class Panel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(bgr, 0, 0, 1200, 600, null);
-        if (stage == introStage) {
+        if (stage == introStage){
             intro.draw(g2);
-
-        } else if (stage == optionStage) {
-            // chartStage = true;
-            // System.out.println(chartStage);
-            // option.draw(g2);
-            // try {
-            // table = new Table(this);
-            // } catch (Exception e) {
-            // // TODO: handle exception
-            // }
-
-            // table.draw(g2);
-
+            
         }
-        // repaint();
+        else if (stage == optionStage)
+            option.draw(g2);
+        else table.draw(g2);
+
+        repaint();
     }
 
 }
