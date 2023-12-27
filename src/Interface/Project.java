@@ -10,6 +10,7 @@ public class Project extends JFrame {
 
     Panel panel, tablePanel;
     Table table;
+    private boolean chartStage = false;
 
     public Project() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,10 +22,23 @@ public class Project extends JFrame {
 
         panel = new Panel();
         add(panel);
+        // if (getChartStage() == true) {
+        System.out.println(getChartStage());
+        JPanel tablePanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2 = (Graphics2D) g;
+                Table table = new Table(this);
+                table.draw(g2);
+            }
 
-        // tablePanel = new Panel(table);
+        };
 
-        // panel.add(tablePanel, BorderLayout.WEST);
+        tablePanel.setIgnoreRepaint(true);
+        add(tablePanel);
+        tablePanel.setSize(getWidth() / 3, getHeight());
+        // }
 
         setLocationRelativeTo(null);
         setVisible(true);
@@ -35,4 +49,11 @@ public class Project extends JFrame {
         panel.startThread();
     }
 
+    public boolean getChartStage() {
+        return chartStage;
+    }
+
+    public void setChartStage(boolean chartStage) {
+        this.chartStage = chartStage;
+    }
 }
