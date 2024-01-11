@@ -100,7 +100,6 @@ public class Panel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(bgr, 0, 0, 1200, 600, null);
         if (stage == introStage) {
             intro.draw(g2);
 
@@ -117,7 +116,7 @@ public class Panel extends JPanel implements Runnable {
             // table.draw(g2);
 
         }
-        // repaint();
+
     }
 
 }

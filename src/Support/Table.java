@@ -6,15 +6,14 @@ import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
-import java.awt.Component;
+import java.awt.BorderLayout;
 import java.awt.Graphics2D;
-
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
+import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -44,7 +43,7 @@ public class Table implements TableModelListener {
         spTable = new JScrollPane(table);
         tableModel = new DefaultTableModel(data, item);
         try {
-            table.setIgnoreRepaint(true);
+
             table.setCellSelectionEnabled(true);
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
         } catch (Exception e) {
