@@ -60,8 +60,7 @@ public class Intro {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Start");
                 panel.stage = panel.optionStage;
-                panel.remove(startButton);
-                panel.remove(gif);
+                panel.removeAll();
             }
         };
         startButton.addActionListener(startListener);

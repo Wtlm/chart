@@ -8,13 +8,18 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import Action.MouseHandler;
+import Stages.BarChart;
+import Stages.Chart;
 import Stages.Intro;
 import Stages.Option;
+import Stages.PieChart;
 import Support.Table;
 
 public class Panel extends JPanel implements Runnable {
     public Intro intro;
     public Option option;
+    public BarChart barChart;
+    public PieChart pieChart;
     public Table table;
     public int stage;
     public int introStage = 0;
@@ -22,6 +27,7 @@ public class Panel extends JPanel implements Runnable {
     public int pieStage = 2;
     public int barStage = 3;
     public boolean run = true;
+    boolean chartStage = false;
 
     public Thread thread;
     BufferedImage bgr;
@@ -31,6 +37,8 @@ public class Panel extends JPanel implements Runnable {
         try {
             intro = new Intro(this);
             option = new Option(this);
+            // barChart = new BarChart(this);
+            pieChart = new PieChart(this);
             // table = new Table(this);
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
 
@@ -46,12 +54,20 @@ public class Panel extends JPanel implements Runnable {
         }
     }
 
+    // public boolean getChartStage() {
+    // return chartStage;
+    // }
+
     public void update() {
         if (stage == optionStage) {
+
             if (option.getHeight() > 0) {
                 option.setHeight(option.getHeight() - 10);
             }
         }
+        // if (stage == barStage || stage == pieStage) {
+        // barChart.updateChart();
+        // }3
     }
 
     @Override
@@ -89,7 +105,7 @@ public class Panel extends JPanel implements Runnable {
             intro.draw(g2);
 
         } else if (stage == optionStage) {
-            // chartStage = true;
+
             // System.out.println(chartStage);
             // option.draw(g2);
             // try {
