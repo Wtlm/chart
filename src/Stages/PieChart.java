@@ -2,6 +2,7 @@ package Stages;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.Dataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
@@ -16,7 +17,10 @@ public class PieChart extends Chart {
     @Override
     public JFreeChart createChart(Dataset dataset) {
         JFreeChart pieChart = ChartFactory.createPieChart("name", (PieDataset) dataset, true, true, false);
-
+        PiePlot pp = (PiePlot) pieChart.getPlot();
+        for (int i = 0; i < tablePanel.table.getColumnCount(); i++) {
+            pp.setSectionPaint(tablePanel.table.getValue(0, i), getColor());
+        }
         return pieChart;
 
     }

@@ -1,12 +1,20 @@
 package Stages;
 
-import java.awt.BorderLayout;
+import java.awt.*;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.Random;
+
+import org.jfree.chart.ChartMouseEvent;
+import org.jfree.chart.ChartMouseListener;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.entity.CategoryItemEntity;
+import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.general.Dataset;
 
 import Interface.Panel;
@@ -30,6 +38,24 @@ public class Chart implements ActionListener, TableObserver {
 
         chartPanel = new ChartPanel(chart);
         tablePanel.addObserver(this);
+        chartPanel.setMouseWheelEnabled(true);
+        chartPanel.setRangeZoomable(true);
+        chartPanel.setDomainZoomable(true);
+        chartPanel.addChartMouseListener(new ChartMouseListener(){
+
+            @Override
+            public void chartMouseClicked(ChartMouseEvent arg0) {
+
+            }
+
+            @Override
+            public void chartMouseMoved(ChartMouseEvent arg0){
+                CategoryPlot plot = (CategoryPlot) arg0.getChart().getPlot();
+                BarRenderer renderer = (BarRenderer) plot.getRenderer();
+                renderer.setDefaultItemLabelsVisible(true);
+            }
+                
+        });
     }
 
     public void setData() {
@@ -48,7 +74,6 @@ public class Chart implements ActionListener, TableObserver {
     }
 
     public void updateChart() {
-
         setData();
         chartPanel.setChart(chart);
         chartPanel.repaint();
@@ -68,8 +93,13 @@ public class Chart implements ActionListener, TableObserver {
         return chart;
     }
 
-    public void setColor() {
 
+    public Color getColor(){
+        Random rand = new Random();
+        int j = rand.nextInt(115) + 140;
+        int i = rand.nextInt(115) + 140;
+        Color c = new Color(j, i, 219);
+        return c;
     }
 
     @Override

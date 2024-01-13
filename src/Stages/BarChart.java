@@ -2,10 +2,15 @@ package Stages;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.Dataset;
+
+import java.awt.*;
 
 import Interface.Panel;
 
@@ -20,7 +25,17 @@ public class BarChart extends Chart {
         JFreeChart barChart = ChartFactory.createBarChart("name", "Xname", "Yname", (CategoryDataset) dataset,
                 PlotOrientation.VERTICAL,
                 true, true, false);
+        CategoryPlot cplot = (CategoryPlot)barChart.getPlot();
+        cplot.setBackgroundPaint(Color.WHITE);
+        cplot.setRangeGridlinePaint(Color.darkGray);
 
+        ((BarRenderer)cplot.getRenderer()).setBarPainter(new StandardBarPainter());
+
+        BarRenderer r = (BarRenderer)barChart.getCategoryPlot().getRenderer();
+        for (int i = 0; i < tablePanel.table.getRowCount(); i++) {
+            r.setSeriesPaint(i, getColor());
+        }
+    
         return barChart;
 
     }
