@@ -12,7 +12,7 @@ import Interface.Panel;
 public class BarChart extends Chart {
     public BarChart(Panel panel) {
         super(panel);
-        // TODO Auto-generated constructor stub
+
     }
 
     @Override
@@ -35,18 +35,13 @@ public class BarChart extends Chart {
                 String columnKey = tablePanel.table.getValue(0, j);
                 String value = tablePanel.table.getValue(i, j);
 
-                // Check if the value is a number before adding it to the dataset
                 if (value != null && checkNum(value)) {
                     Number val = Double.parseDouble(value);
                     dataset.addValue((Number) val, (Comparable) rowKey, (Comparable) columnKey);
-                    System.out.println(val);
-                    // System.out.println("???");
                 }
             }
         }
-        // System.out.println("Dataset creation completed");
         return dataset;
-        // System.out.println(dataset);
     }
 
     @Override

@@ -6,21 +6,17 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import Action.MouseHandler;
 import Stages.BarChart;
-import Stages.Chart;
+
 import Stages.Intro;
 import Stages.Option;
 import Stages.PieChart;
-import Support.Table;
 
 public class Panel extends JPanel implements Runnable {
     public Intro intro;
     public Option option;
     public BarChart barChart;
     public PieChart pieChart;
-    public Table table;
     public int stage;
     public int introStage = 0;
     public int optionStage = 1;
@@ -37,14 +33,12 @@ public class Panel extends JPanel implements Runnable {
         try {
             intro = new Intro(this);
             option = new Option(this);
-            // barChart = new BarChart(this);
-            pieChart = new PieChart(this);
-            // table = new Table(this);
-            bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
 
+            bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
         } catch (Exception e) {
             // TODO: handle exception
         }
+
     }
 
     public void startThread() {
@@ -54,20 +48,29 @@ public class Panel extends JPanel implements Runnable {
         }
     }
 
-    // public boolean getChartStage() {
-    // return chartStage;
-    // }
-
     public void update() {
         if (stage == optionStage) {
 
             if (option.getHeight() > 0) {
                 option.setHeight(option.getHeight() - 10);
             }
+
+        } else if (stage == pieStage) {
+            run = false;
+            pieChart = new PieChart(this);
+            this.setLayout(new BorderLayout());
+            pieChart.addChart(pieChart);
+            revalidate();
+
+        } else if (stage == barStage) {
+            run = false;
+            barChart = new BarChart(this);
+            this.setLayout(new BorderLayout());
+            barChart.addChart(barChart);
+            revalidate();
+            System.out.println(stage);
         }
-        // if (stage == barStage || stage == pieStage) {
-        // barChart.updateChart();
-        // }3
+
     }
 
     @Override
@@ -100,21 +103,12 @@ public class Panel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        // g2.drawImage(bgr, 0, 0, null);
         if (stage == introStage) {
             intro.draw(g2);
 
         } else if (stage == optionStage) {
-
-            // System.out.println(chartStage);
-            // option.draw(g2);
-            // try {
-            // table = new Table(this);
-            // } catch (Exception e) {
-            // // TODO: handle exception
-            // }
-
-            // table.draw(g2);
-
+            option.draw(g2);
         }
 
     }

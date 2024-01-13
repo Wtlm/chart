@@ -1,6 +1,6 @@
 package Interface;
 
-import java.awt.Dimension;
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -20,6 +20,8 @@ public class TablePanel extends JPanel {
         // this.setSize(this.getWidth() / 3, this.getHeight());
         this.setIgnoreRepaint(true);
         table = new Table(this);
+        this.setLayout(new BorderLayout());
+        this.add(table.spTable, BorderLayout.CENTER);
     }
 
     public void getTableSize(Project project) {

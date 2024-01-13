@@ -9,11 +9,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
-
 import javax.imageio.ImageIO;
-import javax.swing.border.*;
-
-import Action.MouseHandler;
 import Interface.Panel;
 
 public class Option {
@@ -34,10 +30,10 @@ public class Option {
         try {
 
             bgr = ImageIO.read(new File("D:/DSA/chart/Data/BGR.png"));
-            pie1 =  ImageIO.read(new File("D:/DSA/chart/Data/pie1.png"));
-            pie2 =  ImageIO.read(new File("D:/DSA/chart/Data/pie2.png"));
-            bar1 =  ImageIO.read(new File("D:/DSA/chart/Data/bar1.png"));
-            bar2 =  ImageIO.read(new File("D:/DSA/chart/Data/bar2.png"));
+            pie1 = ImageIO.read(new File("D:/DSA/chart/Data/pie1.png"));
+            pie2 = ImageIO.read(new File("D:/DSA/chart/Data/pie2.png"));
+            bar1 = ImageIO.read(new File("D:/DSA/chart/Data/bar1.png"));
+            bar2 = ImageIO.read(new File("D:/DSA/chart/Data/bar2.png"));
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -48,14 +44,14 @@ public class Option {
 
     public void draw(Graphics2D g2) {
         g2.drawImage(bgr, 0, getHeight(), 1200, 600, null);
-        if (chooseBar == 0) 
+        if (chooseBar == 0)
             g2.drawImage(bar1, 700, getHeight() + 100, 400, 400, null);
-        else 
+        else
             g2.drawImage(bar2, 700, getHeight() + 100, 400, 400, null);
 
-        if (choosePie == 0) 
+        if (choosePie == 0)
             g2.drawImage(pie1, 100, getHeight() + 100, 400, 400, null);
-        else 
+        else
             g2.drawImage(pie2, 100, getHeight() + 100, 400, 400, null);
 
         addButton(panel);
@@ -79,20 +75,21 @@ public class Option {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                panel.stage = 2;
-                panel.remove(label);
-                panel.remove(pie);
-                panel.remove(bar);
+
+                panel.stage = panel.pieStage;
+                // System.out.println(panel.stage);
+                panel.removeAll();
+
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                
+
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                
+
             }
 
             @Override
@@ -104,7 +101,7 @@ public class Option {
             public void mouseExited(MouseEvent e) {
                 choosePie = 0;
             }
-            
+
         });
         panel.add(pie);
         bar.setBounds(700, getHeight() + 100, 400, 400);
@@ -112,20 +109,19 @@ public class Option {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                panel.stage = 3;
-                panel.remove(label);
-                panel.remove(pie);
-                panel.remove(bar);
+                panel.stage = panel.barStage;
+
+                panel.removeAll();
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                
+
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                
+
             }
 
             @Override
@@ -137,7 +133,7 @@ public class Option {
             public void mouseExited(MouseEvent e) {
                 chooseBar = 0;
             }
-            
+
         });
         panel.add(bar);
     }
@@ -151,4 +147,3 @@ public class Option {
     }
 
 }
-

@@ -5,15 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-
-import Action.MouseHandler;
 import Interface.Panel;
 
 import javax.imageio.*;
 import java.io.*;
 
 public class Intro {
-    MouseHandler mouseHandler;
     Panel panel;
 
     public Image cover;
@@ -61,6 +58,7 @@ public class Intro {
                 System.out.println("Start");
                 panel.stage = panel.optionStage;
                 panel.removeAll();
+
             }
         };
         startButton.addActionListener(startListener);

@@ -1,24 +1,16 @@
 package Support;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.imageio.ImageIO;
-
-import java.awt.BorderLayout;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-import Interface.Project;
 import Interface.TablePanel;
 
 public class Table implements TableModelListener {
@@ -27,18 +19,15 @@ public class Table implements TableModelListener {
     public static JTable table;
     public JScrollPane spTable;
     public BufferedImage bgr;
-    public static int nColumn = 5, nRow = 5;
+    public static int nColumn = 6;
     public static String[][] data;
     public static String[] item;
-    public boolean updateChart = false;
 
     public Table(TablePanel tablePanel) {
         this.panel = tablePanel;
-        data = new String[][] { { "Label ", "Category1", "Category2", "Category3", "Category4" },
-                { "Item1", "12", "34", "23", "57" } };
-        // data = new Object[nRow][nColumn];
+        data = new String[][] { { "Label ", "Category1", "Category2", "Category3", "Category4", "Category5" },
+                { "Item1", "12", "34", "23", "57", "98" } };
         item = new String[nColumn];
-        // setDefaultTable();
         table = new JTable();
         spTable = new JScrollPane(table);
         tableModel = new DefaultTableModel(data, item);
@@ -54,18 +43,8 @@ public class Table implements TableModelListener {
     }
 
     public void draw(Graphics2D g2) {
-        // g2.drawImage(bgr, 0, 0, null);
-        // table.setBounds(0, 0, 500, 600);
-        spTable.setBounds(0, 0, 500, 600);
-
-        // spTable.setSize(700, 700);
-        // spTable.getIgnoreRepaint();
-        // setTable(panel);
-        // getValue();
+        spTable.setBounds(0, 0, panel.getWidth(), panel.getHeight());
     }
-    // public void setTableSize(Project project) {
-    // spTable.setSize(project.getSize());
-    // }
 
     public void setTable(TablePanel tablePanel) {
 
@@ -75,14 +54,6 @@ public class Table implements TableModelListener {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setAutoscrolls(true);
         table.setFillsViewportHeight(true);
-        // table.setSize(tablePanel.getPreferredSize().width,
-        // tablePanel.getPreferredSize().height);
-        // panel.add(table);
-        // spTable.setSize(tablePanel.getPreferredSize().width,
-        // tablePanel.getPreferredSize().height);
-        // System.out.println(Project.getW() + " " + Project.getH());
-
-        tablePanel.add(spTable);
 
     }
 
@@ -91,53 +62,7 @@ public class Table implements TableModelListener {
     }
 
     public String getValue(int row, int col) {
-
-        // for (int i = 0; i < table.getRowCount(); i++) {
-        // for (int j = 0; j < table.getColumnCount(); j++) {
-        // System.out.println(table.getValueAt(i, j));
-
-        // }
-        // }
-        // System.out.println();
-        // for (int j = 0; j < table.getColumnCount(); j++) {
-        // System.out.println(item[j]);
-        // }
         return (String) table.getValueAt(row, col);
-    }
-
-    public void display() {
-        // for(int i = 0; i < table.get)
-        // System.out.println(Arrays.toString(getRowHeader()));
-        // System.out.println(Arrays.toString(getColumnHeader()));
-        // for (int i = 0; i < getRowHeader().length; i++) {
-        // System.out.println(getRowHeader()[i]);
-        // System.out.println(getColumnHeader()[i]);
-        // }
-    }
-
-    public Object getHeader(int row, int col) {
-
-        // String[] rowHeader = new String[table.getColumnCount()];
-        // if (table.getRowCount() > 0) {
-        // for (int i = 0; i < table.getColumnCount(); i++) {
-        // rowHeader[i] = (String) table.getValueAt(0, i);
-        // // System.out.println(rowHeader[i]);
-        // }
-        // }
-        // System.out.println();
-        return table.getValueAt(row, col);
-    }
-
-    public Object getColumnHeader() {
-        String[] colHeader = new String[table.getRowCount()];
-        if (table.getColumnCount() > 0) {
-            for (int i = 0; i < table.getRowCount(); i++) {
-                colHeader[i] = (String) table.getValueAt(i, 0);
-                // System.out.println(colHeader[i]);
-            }
-        }
-        System.out.println();
-        return colHeader;
     }
 
     public void updateObservers() {
@@ -148,15 +73,6 @@ public class Table implements TableModelListener {
 
     @Override
     public void tableChanged(TableModelEvent e) {
-        // getValue();
-        // display();
-        // getRowHeader();
-        // getColumnHeader();
-
-        // display();
-        // if (e.UPDATE == 1)
-        updateChart = true;
-        System.out.println(updateChart);
         if (e.getLastRow() == table.getRowCount() - 1) {
             tableModel.removeTableModelListener(this);
             tableModel.addRow(new String[table.getColumnCount()]);
@@ -170,8 +86,6 @@ public class Table implements TableModelListener {
         }
         updateObservers();
 
-        // else
-        // updateChart = false;
     }
 
     public int getRowCount() {
