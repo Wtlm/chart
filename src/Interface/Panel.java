@@ -68,7 +68,7 @@ public class Panel extends JPanel implements Runnable {
             this.setLayout(new BorderLayout());
             barChart.addChart(barChart);
             revalidate();
-            System.out.println(stage);
+            // System.out.println(stage);
         }
 
     }

@@ -1,6 +1,7 @@
 package Stages;
 
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -11,13 +12,14 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.Dataset;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 import Interface.Panel;
 
 public class BarChart extends Chart {
     public BarChart(Panel panel) {
         super(panel);
-
+        
     }
 
     @Override
@@ -62,6 +64,11 @@ public class BarChart extends Chart {
     @Override
     public void tableChanged() {
         super.tableChanged();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
     }
 
 }

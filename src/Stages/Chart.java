@@ -1,11 +1,11 @@
 package Stages;
 
 import java.awt.*;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.util.Random;
+import javax.swing.JButton;
 
 import org.jfree.chart.ChartMouseEvent;
 import org.jfree.chart.ChartMouseListener;
@@ -25,37 +25,20 @@ public class Chart implements ActionListener, TableObserver {
     protected Dataset dataset;
     private JFreeChart chart;
     private CategoryPlot categoryPlot;
-    private ChartPanel chartPanel;
+    protected ChartPanel chartPanel;
     TablePanel tablePanel;
     Panel panel;
 
+
     public Chart(Panel panel) {
         this.panel = panel;
-
         tablePanel = new TablePanel();
-
         setData();
-
         chartPanel = new ChartPanel(chart);
-        tablePanel.addObserver(this);
         chartPanel.setMouseWheelEnabled(true);
         chartPanel.setRangeZoomable(true);
         chartPanel.setDomainZoomable(true);
-        chartPanel.addChartMouseListener(new ChartMouseListener(){
-
-            @Override
-            public void chartMouseClicked(ChartMouseEvent arg0) {
-
-            }
-
-            @Override
-            public void chartMouseMoved(ChartMouseEvent arg0){
-                CategoryPlot plot = (CategoryPlot) arg0.getChart().getPlot();
-                BarRenderer renderer = (BarRenderer) plot.getRenderer();
-                renderer.setDefaultItemLabelsVisible(true);
-            }
-                
-        });
+        tablePanel.addObserver(this);
     }
 
     public void setData() {
@@ -65,8 +48,10 @@ public class Chart implements ActionListener, TableObserver {
     }
 
     public void addChart(Chart chart) {
+        
         panel.add(chart.chartPanel, BorderLayout.CENTER);
         panel.add(chart.tablePanel, BorderLayout.WEST);
+        
     }
 
     public Dataset setDefaultData() {

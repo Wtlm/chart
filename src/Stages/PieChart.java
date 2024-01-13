@@ -1,5 +1,8 @@
 package Stages;
 
+import java.awt.Color;
+import java.util.Random;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
@@ -18,8 +21,14 @@ public class PieChart extends Chart {
     public JFreeChart createChart(Dataset dataset) {
         JFreeChart pieChart = ChartFactory.createPieChart("name", (PieDataset) dataset, true, true, false);
         PiePlot pp = (PiePlot) pieChart.getPlot();
-        for (int i = 0; i < tablePanel.table.getColumnCount(); i++) {
-            pp.setSectionPaint(tablePanel.table.getValue(0, i), getColor());
+        for (int i = 1; i < 100; i++) {
+            Random rand = new Random();
+            int j = rand.nextInt(120) + 130;
+            int k = rand.nextInt(120) + 130;
+            Color c = new Color(j, k, 219);
+            if (tablePanel.table.getColumnCount() >= k)
+                pp.setSectionPaint(tablePanel.table.getValue(0, i), c);
+            else break;
         }
         return pieChart;
 
@@ -43,6 +52,7 @@ public class PieChart extends Chart {
         }
         return dataset;
     }
+
 
     @Override
     public void tableChanged() {
